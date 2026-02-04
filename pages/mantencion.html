@@ -47,131 +47,145 @@
 </nav>
 
 <!-- MAIN -->
-<main class="flex-fill">
-  <div class="container mt-4">
+<main class="flex-fill " style="background-color: rgb(238, 238, 241);" >
+  <div class="container py-4 ">
+    <div class="row justify-content-center ">
+      <!-- Ajusta el ancho aquí (más angosto o más ancho) -->
+      <div class="col-12 col-md-10 col-lg-6 col-xl-7 ">
 
-    <h4 class="mb-4">Solicitud de Mantención</h4>
+        <!-- Tarjeta centrada -->
+        <div class="card shadow-sm border-0 ">
+          <div class="card-body p-4 p-md-5 ">
 
-    <form class="row g-3 needs-validation" novalidate id="formMantencion">
+            <h4 class="mb-4">Solicitud de Mantención</h4>
 
-      <!-- FILA 1: MAQUINARIA (izq) - TIPO (der) -->
+            <form class="row g-3 needs-validation"  novalidate id="formMantencion">
 
-      <!-- MAQUINARIA -->
-      <div class="col-md-6">
-        <label class="form-label" for="maquinaria">Maquinaria</label>
-        <select class="form-select" id="maquinaria" required>
-          <option value="">Seleccione...</option>
-          <option value="580SV">Janssen 580SV</option>
-          <option value="821G">Janssen 821G</option>
-        </select>
-        <div class="invalid-feedback">
-          Debe seleccionar una maquinaria.
-        </div>
-      </div>
+              <!-- FILA 1: MAQUINARIA (izq) - TIPO (der) -->
 
-      <!-- TIPO DE MANTENCIÓN (condicional) -->
-      <div class="col-md-6">
-        <label class="form-label">Tipo de mantención</label>
+              <!-- MAQUINARIA -->
+              <div class="col-md-6">
+                <label class="form-label" for="maquinaria">Maquinaria</label>
+                <select class="form-select" id="maquinaria" required>
+                  <option value="">Seleccione...</option>
+                  <option value="580SV">Janssen 580SV</option>
+                  <option value="821G">Janssen 821G</option>
+                </select>
+                <div class="invalid-feedback">
+                  Debe seleccionar una maquinaria.
+                </div>
+              </div>
 
-        <!-- Opciones "aparte" (radio) -->
-        <div class="d-flex flex-column gap-2">
+              <!-- TIPO DE MANTENCIÓN (condicional) -->
+              <div class="col-md-6">
+                <label class="form-label">Tipo de mantención</label>
 
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="tipoMantencion" id="tipoPrimera" value="primera" required>
-            <label class="form-check-label" for="tipoPrimera">
-              Primera mantención (4000 horas)
-            </label>
+                <div class="d-flex flex-column gap-2">
+
+                  <!-- Primera mantención (opción aparte) -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="tipoMantencion" id="tipoPrimera" value="primera" required>
+                    <label class="form-check-label" for="tipoPrimera">
+                      Primera mantención (4000 horas)
+                    </label>
+                  </div>
+
+                  <!-- Correctiva (opción aparte) -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="tipoMantencion" id="tipoCorrectiva" value="correctiva" required>
+                    <label class="form-check-label" for="tipoCorrectiva">
+                      Mantención correctiva (reparación)
+                    </label>
+                  </div>
+
+                  <!-- Preventiva -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="tipoMantencion" id="tipoPreventiva" value="preventiva" required>
+                    <label class="form-check-label" for="tipoPreventiva">
+                      Mantención preventiva
+                    </label>
+                  </div>
+
+                  <!-- Desplegable SOLO para subtipos preventivos (se muestra solo si Preventiva está seleccionada) -->
+                  <div id="preventivaExtraWrap" class="mt-2 d-none">
+                    <select class="form-select" id="preventivaExtra">
+                      <option value="">Seleccione tipo preventivo...</option>
+                      <option value="prev_general">Preventiva general</option>
+                      <option value="prev_filtros">Cambio de filtros</option>
+                      <option value="prev_aceite">Cambio de aceite</option>
+                    </select>
+                    <div class="form-text">
+                      Solo aplica si seleccionas <strong>mantención preventiva</strong>.
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="invalid-feedback">
+                  Seleccione un tipo de mantención.
+                </div>
+              </div>
+
+              <!-- FILA 2: HORAS (izq) - SUCURSAL (der) -->
+
+              <!-- HORAS -->
+              <div class="col-md-6">
+                <label class="form-label" for="horas">Horas de operación</label>
+                <input type="number" class="form-control" id="horas" placeholder="Ej: 4000" min="0" required>
+                <div class="invalid-feedback">
+                  Ingrese horas de operación.
+                </div>
+                <div class="form-text" id="horasHint"></div>
+              </div>
+
+              <!-- SUCURSAL -->
+              <div class="col-md-6">
+                <label class="form-label" for="sucursal">Sucursal</label>
+                <select class="form-select" id="sucursal" required>
+                  <option value="">Seleccione...</option>
+                  <option>Antofagasta</option>
+                  <option>Santiago</option>
+                  <option>Concepción</option>
+                  <option>Temuco</option>
+                  <option>Osorno</option>
+                </select>
+                <div class="invalid-feedback">
+                  Seleccione una sucursal.
+                </div>
+              </div>
+
+              <!-- FILA 3: FECHA (izq) -->
+              <div class="col-md-6">
+                <label class="form-label" for="fecha">Fecha preferida</label>
+                <input type="date" class="form-control" id="fecha" required>
+                <div class="invalid-feedback">
+                  Seleccione una fecha.
+                </div>
+              </div>
+
+              <!-- espacio para mantener grilla alineada -->
+              <div class="col-md-6 d-none d-md-block"></div>
+
+              <!-- FILA 4: OBSERVACIONES -->
+              <div class="col-12">
+                <label class="form-label" for="obs">Observaciones (opcional)</label>
+                <textarea class="form-control" id="obs" rows="3"></textarea>
+              </div>
+
+              <!-- BOTÓN -->
+              <div class="col-12 d-grid mt-3">
+                <button class="btn btn-danger" type="submit">
+                  Agendar Mantención
+                </button>
+              </div>
+
+            </form>
+
           </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="tipoMantencion" id="tipoCorrectiva" value="correctiva" required>
-            <label class="form-check-label" for="tipoCorrectiva">
-              Mantención correctiva (reparación)
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="tipoMantencion" id="tipoPreventiva" value="preventiva" required>
-            <label class="form-check-label" for="tipoPreventiva">
-              Mantención preventiva
-            </label>
-          </div>
-
-          <!-- Si quieres un desplegable SOLO para tipos preventivos, lo dejamos aquí -->
-          <div id="preventivaExtraWrap" class="mt-2 d-none">
-            <select class="form-select" id="preventivaExtra">
-              <option value="">Seleccione tipo preventivo...</option>
-              <option value="prev_general">Preventiva general</option>
-              <option value="prev_filtros">Cambio de filtros</option>
-              <option value="prev_aceite">Cambio de aceite</option>
-            </select>
-            <div class="form-text">
-              Solo aplica si seleccionas <strong>mantención preventiva</strong>.
-            </div>
-          </div>
-
         </div>
 
-        <div class="invalid-feedback">
-          Seleccione un tipo de mantención.
-        </div>
       </div>
-
-      <!-- FILA 2: HORAS (izq) - SUCURSAL (der) -->
-
-      <!-- HORAS -->
-      <div class="col-md-6">
-        <label class="form-label" for="horas">Horas de operación</label>
-        <input type="number" class="form-control" id="horas" placeholder="Ej: 4000" min="0" required>
-        <div class="invalid-feedback">
-          Ingrese horas de operación.
-        </div>
-        <div class="form-text" id="horasHint"></div>
-      </div>
-
-      <!-- SUCURSAL -->
-      <div class="col-md-6">
-        <label class="form-label" for="sucursal">Sucursal</label>
-        <select class="form-select" id="sucursal" required>
-          <option value="">Seleccione...</option>
-          <option>Antofagasta</option>
-          <option>Santiago</option>
-          <option>Concepción</option>
-          <option>Temuco</option>
-          <option>Osorno</option>
-        </select>
-        <div class="invalid-feedback">
-          Seleccione una sucursal.
-        </div>
-      </div>
-
-      <!-- FILA 3: FECHA (izq) -->
-      <div class="col-md-6">
-        <label class="form-label" for="fecha">Fecha preferida</label>
-        <input type="date" class="form-control" id="fecha" required>
-        <div class="invalid-feedback">
-          Seleccione una fecha.
-        </div>
-      </div>
-
-      <!-- (opcional) espacio para mantener grilla alineada -->
-      <div class="col-md-6 d-none d-md-block"></div>
-
-      <!-- FILA 4: OBSERVACIONES -->
-      <div class="col-12">
-        <label class="form-label" for="obs">Observaciones (opcional)</label>
-        <textarea class="form-control" id="obs" rows="3"></textarea>
-      </div>
-
-      <!-- BOTÓN -->
-      <div class="col-12 d-grid mt-3">
-        <button class="btn btn-danger" type="submit">
-          Agendar Mantención
-        </button>
-      </div>
-
-    </form>
-
+    </div>
   </div>
 </main>
 
@@ -186,20 +200,14 @@
     const preventivaExtraWrap = document.getElementById('preventivaExtraWrap');
     const preventivaExtra = document.getElementById('preventivaExtra');
 
-    const horas = document.getElementById('horas');
     const horasHint = document.getElementById('horasHint');
 
-    // --- Lógica condicional solicitada ---
     function aplicarCondicionTipo() {
-      // Siempre se deben ingresar horas (ya es required), aquí solo damos ayuda visual
       horasHint.textContent = '';
 
       if (tipoPrimera.checked) {
-        // Si es primera mantención: no mostrar opciones extra preventivas
         preventivaExtraWrap.classList.add('d-none');
         preventivaExtra.value = '';
-
-        // Sugerencia/hint de horas
         horasHint.textContent = 'Para Primera Mantención, normalmente corresponde a 4000 horas.';
       }
 
@@ -210,21 +218,19 @@
       }
 
       if (tipoPreventiva.checked) {
-        // Si es preventiva, mostramos el select extra (si te sirve)
         preventivaExtraWrap.classList.remove('d-none');
         horasHint.textContent = 'Para Preventiva, ingrese las horas actuales de operación.';
       }
     }
 
-    // Eventos
     [tipoPrimera, tipoCorrectiva, tipoPreventiva].forEach(r => {
       r.addEventListener('change', aplicarCondicionTipo);
     });
 
     // Validación Bootstrap
     form.addEventListener('submit', function (event) {
-      // Si preventiva está elegida, opcionalmente puedes exigir que el select extra se elija
-      // Si NO quieres exigirlo, deja esto comentado.
+      // Si quieres exigir que el select preventivo se elija cuando es Preventiva,
+      // descomenta este bloque:
       // if (tipoPreventiva.checked && !preventivaExtra.value) {
       //   preventivaExtra.setCustomValidity('Seleccione un tipo preventivo');
       // } else {
