@@ -21,7 +21,6 @@
         <div class="container-fluid">
         <img src="../assets/img/Janssen MAQ.png" class="login-logo" alt="Janssen Maquinaria">
 
-        <a class="navbar-brand d-flex align-items-center" href="home.html">Janssen Maquinarias</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
             <span class="navbar-toggler-icon"></span>
@@ -39,7 +38,8 @@
             </ul>
 
             <span class="navbar-text text-white">
-                Constructora Andes | 76.123.456-7
+                                    Bienvenido, Constructora Andes | 76.123.456-7
+
             </span>
         </div>
 
@@ -48,116 +48,218 @@
 
 <!-- MAIN -->
 <main class="flex-fill">
-    <div class="container mt-4">
+  <div class="container mt-4">
 
-        <h4 class="mb-4">Solicitud de Mantención</h4>
+    <h4 class="mb-4">Solicitud de Mantención</h4>
 
-        <form class="row g-3 needs-validation" novalidate>
+    <form class="row g-3 needs-validation" novalidate id="formMantencion">
 
-            <!-- MAQUINARIA -->
-            <div class="col-md-6">
-                <label class="form-label">Maquinaria</label>
-                <select class="form-select" required>
-                    <option value="">Seleccione...</option>
-                    <option>Janssen 580SV</option>
-                    <option>Janssen 821G</option>
-                </select>
-                <div class="invalid-feedback">
-                    Debe seleccionar una maquinaria.
-                </div>
+      <!-- FILA 1: MAQUINARIA (izq) - TIPO (der) -->
+
+      <!-- MAQUINARIA -->
+      <div class="col-md-6">
+        <label class="form-label" for="maquinaria">Maquinaria</label>
+        <select class="form-select" id="maquinaria" required>
+          <option value="">Seleccione...</option>
+          <option value="580SV">Janssen 580SV</option>
+          <option value="821G">Janssen 821G</option>
+        </select>
+        <div class="invalid-feedback">
+          Debe seleccionar una maquinaria.
+        </div>
+      </div>
+
+      <!-- TIPO DE MANTENCIÓN (condicional) -->
+      <div class="col-md-6">
+        <label class="form-label">Tipo de mantención</label>
+
+        <!-- Opciones "aparte" (radio) -->
+        <div class="d-flex flex-column gap-2">
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipoMantencion" id="tipoPrimera" value="primera" required>
+            <label class="form-check-label" for="tipoPrimera">
+              Primera mantención (4000 horas)
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipoMantencion" id="tipoCorrectiva" value="correctiva" required>
+            <label class="form-check-label" for="tipoCorrectiva">
+              Mantención correctiva (reparación)
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipoMantencion" id="tipoPreventiva" value="preventiva" required>
+            <label class="form-check-label" for="tipoPreventiva">
+              Mantención preventiva
+            </label>
+          </div>
+
+          <!-- Si quieres un desplegable SOLO para tipos preventivos, lo dejamos aquí -->
+          <div id="preventivaExtraWrap" class="mt-2 d-none">
+            <select class="form-select" id="preventivaExtra">
+              <option value="">Seleccione tipo preventivo...</option>
+              <option value="prev_general">Preventiva general</option>
+              <option value="prev_filtros">Cambio de filtros</option>
+              <option value="prev_aceite">Cambio de aceite</option>
+            </select>
+            <div class="form-text">
+              Solo aplica si seleccionas <strong>mantención preventiva</strong>.
             </div>
+          </div>
 
-            <!-- HORAS -->
-            <div class="col-md-6">
-                <label class="form-label">Horas de operación</label>
-                <input type="number" class="form-control" placeholder="Ej: 4000" required>
-                <div class="invalid-feedback">
-                    Ingrese horas de operación.
-                </div>
-            </div>
+        </div>
 
-            <!-- TIPO -->
-            <div class="col-md-6">
-                <label class="form-label">Tipo de mantención</label>
-                <select class="form-select" required>
-                    <option value="">Seleccione...</option>
-                    <option>Primera mantención (4000 horas)</option>
-                    <option>Mantención preventiva</option>
-                    <option>Mantención correctiva</option>
-                </select>
-                <div class="invalid-feedback">
-                    Seleccione un tipo de mantención.
-                </div>
-            </div>
+        <div class="invalid-feedback">
+          Seleccione un tipo de mantención.
+        </div>
+      </div>
 
-            <!-- SUCURSAL -->
-            <div class="col-md-6">
-                <label class="form-label">Sucursal</label>
-                <select class="form-select" required>
-                    <option value="">Seleccione...</option>
-                    <option>Antofagasta</option>
-                    <option>Santiago</option>
-                    <option>Concepción</option>
-                    <option>Temuco</option>
-                    <option>Osorno</option>
-                </select>
-                <div class="invalid-feedback">
-                    Seleccione una sucursal.
-                </div>
-            </div>
+      <!-- FILA 2: HORAS (izq) - SUCURSAL (der) -->
 
-            <!-- FECHA -->
-            <div class="col-md-6">
-                <label class="form-label">Fecha preferida</label>
-                <input type="date" class="form-control" required>
-                <div class="invalid-feedback">
-                    Seleccione una fecha.
-                </div>
-            </div>
+      <!-- HORAS -->
+      <div class="col-md-6">
+        <label class="form-label" for="horas">Horas de operación</label>
+        <input type="number" class="form-control" id="horas" placeholder="Ej: 4000" min="0" required>
+        <div class="invalid-feedback">
+          Ingrese horas de operación.
+        </div>
+        <div class="form-text" id="horasHint"></div>
+      </div>
 
-            <!-- OBSERVACIONES -->
-            <div class="col-12">
-                <label class="form-label">Observaciones (opcional)</label>
-                <textarea class="form-control" rows="3"></textarea>
-            </div>
+      <!-- SUCURSAL -->
+      <div class="col-md-6">
+        <label class="form-label" for="sucursal">Sucursal</label>
+        <select class="form-select" id="sucursal" required>
+          <option value="">Seleccione...</option>
+          <option>Antofagasta</option>
+          <option>Santiago</option>
+          <option>Concepción</option>
+          <option>Temuco</option>
+          <option>Osorno</option>
+        </select>
+        <div class="invalid-feedback">
+          Seleccione una sucursal.
+        </div>
+      </div>
 
-            <!-- BOTÓN -->
-            <div class="col-12 d-grid mt-3">
-                <button class="btn btn-danger" type="submit">
-                    Agendar Mantención
-                </button>
-            </div>
+      <!-- FILA 3: FECHA (izq) -->
+      <div class="col-md-6">
+        <label class="form-label" for="fecha">Fecha preferida</label>
+        <input type="date" class="form-control" id="fecha" required>
+        <div class="invalid-feedback">
+          Seleccione una fecha.
+        </div>
+      </div>
 
-        </form>
+      <!-- (opcional) espacio para mantener grilla alineada -->
+      <div class="col-md-6 d-none d-md-block"></div>
 
-    </div>
+      <!-- FILA 4: OBSERVACIONES -->
+      <div class="col-12">
+        <label class="form-label" for="obs">Observaciones (opcional)</label>
+        <textarea class="form-control" id="obs" rows="3"></textarea>
+      </div>
+
+      <!-- BOTÓN -->
+      <div class="col-12 d-grid mt-3">
+        <button class="btn btn-danger" type="submit">
+          Agendar Mantención
+        </button>
+      </div>
+
+    </form>
+
+  </div>
 </main>
 
-<!-- FOOTER -->
-<footer class="footer-marcas mt-auto">
-    <div class="container">
+<script>
+  (function () {
+    const form = document.getElementById('formMantencion');
 
+    const tipoPrimera = document.getElementById('tipoPrimera');
+    const tipoCorrectiva = document.getElementById('tipoCorrectiva');
+    const tipoPreventiva = document.getElementById('tipoPreventiva');
+
+    const preventivaExtraWrap = document.getElementById('preventivaExtraWrap');
+    const preventivaExtra = document.getElementById('preventivaExtra');
+
+    const horas = document.getElementById('horas');
+    const horasHint = document.getElementById('horasHint');
+
+    // --- Lógica condicional solicitada ---
+    function aplicarCondicionTipo() {
+      // Siempre se deben ingresar horas (ya es required), aquí solo damos ayuda visual
+      horasHint.textContent = '';
+
+      if (tipoPrimera.checked) {
+        // Si es primera mantención: no mostrar opciones extra preventivas
+        preventivaExtraWrap.classList.add('d-none');
+        preventivaExtra.value = '';
+
+        // Sugerencia/hint de horas
+        horasHint.textContent = 'Para Primera Mantención, normalmente corresponde a 4000 horas.';
+      }
+
+      if (tipoCorrectiva.checked) {
+        preventivaExtraWrap.classList.add('d-none');
+        preventivaExtra.value = '';
+        horasHint.textContent = 'Para Correctiva, ingrese las horas actuales de operación.';
+      }
+
+      if (tipoPreventiva.checked) {
+        // Si es preventiva, mostramos el select extra (si te sirve)
+        preventivaExtraWrap.classList.remove('d-none');
+        horasHint.textContent = 'Para Preventiva, ingrese las horas actuales de operación.';
+      }
+    }
+
+    // Eventos
+    [tipoPrimera, tipoCorrectiva, tipoPreventiva].forEach(r => {
+      r.addEventListener('change', aplicarCondicionTipo);
+    });
+
+    // Validación Bootstrap
+    form.addEventListener('submit', function (event) {
+      // Si preventiva está elegida, opcionalmente puedes exigir que el select extra se elija
+      // Si NO quieres exigirlo, deja esto comentado.
+      // if (tipoPreventiva.checked && !preventivaExtra.value) {
+      //   preventivaExtra.setCustomValidity('Seleccione un tipo preventivo');
+      // } else {
+      //   preventivaExtra.setCustomValidity('');
+      // }
+
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  })();
+</script>
+
+    <!-- FOOTER -->
+    <footer class="footer-marcas mt-5">
         <div class="marcas-container">
             <div class="marcas-track">
-                <img src="../assets/img/JanssenMAQPNG.png">
-                <img src="../assets/img/580SV_2.jpg">
-                <img src="../assets/img/821G.jpg">
-                <img src="../assets/img/SR210B.jpg">
-                <img src="../assets/img/JanssenMAQ.png">
 
-                <img src="../assets/img/JanssenMAQPNG.png">
-                <img src="../assets/img/580SV_2.jpg">
-                <img src="../assets/img/821G.jpg">
-                <img src="../assets/img/SR210B.jpg">
-                <img src="../assets/img/JanssenMAQ.png">
+                <img src="../assets/img/case.jpg" alt="Janssen">
+                <img src="../assets/img/case2.png" alt="Janssen">
+                <img src="../assets/img/case.jpg" alt="Janssen">
+                <img src="../assets/img/case2.png" alt="Janssen">
+                <img src="../assets/img/case.jpg" alt="Janssen">
+                <img src="../assets/img/case2.png" alt="Janssen">
+                
+
             </div>
         </div>
 
-        <div class="footer-text text-center">
-ALEXANDER AGUILERA · Todos los derechos reservados       
-
-    </div>
-</footer>
+        <div class="footer-text">
+            ALEXANDER AGUILERA · Todos los derechos reservados
+        </div>
+    </footer>
 
 <!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
